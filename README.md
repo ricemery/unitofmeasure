@@ -1,6 +1,11 @@
 unitofmeasure
 =============
 
+Scala library to associate values to unit of measure type and scale. Quantity is intended
+to replace passing unitless/scaleless values through interfaces. Many times it is
+not obvious which unit/scale an interface requires. Using Quantity allows for
+interfaces to allow any unit/scale that the caller desires.
+
 Quantity Types
 --------------
 * Angle
@@ -8,8 +13,6 @@ Quantity Types
 * Length
 * Temperature
 * Time
-
-Scala library to associate values to unit of measure type and scale.
 
 Examples
 ---------------
