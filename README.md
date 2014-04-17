@@ -1,9 +1,17 @@
 unitofmeasure
 =============
 
+Quantity Types
+--------------
+* Angle
+* Frequency
+* Length
+* Temperature
+* Time
+
 Scala library to associate values to unit of measure type and scale.
 
-Length Quantity
+Examples
 ---------------
 
 Example of creating a Length Quantity and conversion between units and scale.
