@@ -6,6 +6,8 @@ to replace passing unitless/scaleless values through interfaces. Many times it i
 not obvious which unit/scale an interface requires. Using Quantity allows for
 interfaces to allow any unit/scale that the caller desires.
 
+Note that this code is not attempting to implement any units of measure JSR.
+
 Quantity Types
 --------------
 * Angle
