@@ -1,25 +1,25 @@
 package com.chainstaysoftware.unitofmeasure
 
-case class Quantity(value: Double, measurementUnit: MeasurementUnit, scale: EngineeringScale) {
-  def add(other: Quantity): Quantity = {
+case class Quantity[T <: MeasurementUnit](value: Double, measurementUnit: T, scale: EngineeringScale) {
+  def add(other: Quantity[T]): Quantity[T] = {
     assert(measurementUnit.category.equals(other.measurementUnit.category),
       "Cannot add quantities with different categories")
 
     val matchedOther = other.convertScaleTo(scale)
     val sum = value + matchedOther.value
-    new Quantity(sum, measurementUnit, scale)
+    Quantity(sum, measurementUnit, scale)
   }
 
-  def subtract(other: Quantity): Quantity = {
+  def subtract(other: Quantity[T]): Quantity[T] = {
     assert(measurementUnit.category.equals(other.measurementUnit.category),
       "Cannot subtract quantities with different categories")
 
     val matchedOther = other.convertScaleTo(scale)
     val sum = value - matchedOther.value
-    new Quantity(sum, measurementUnit, scale)
+    Quantity(sum, measurementUnit, scale)
   }
 
-  def min(other: Quantity): Quantity = {
+  def min(other: Quantity[T]): Quantity[T] = {
     assert(measurementUnit.category.equals(other.measurementUnit.category),
       "Cannot detect min on quantities with different categories")
 
@@ -30,7 +30,7 @@ case class Quantity(value: Double, measurementUnit: MeasurementUnit, scale: Engi
       this
   }
 
-  def max(other: Quantity): Quantity = {
+  def max(other: Quantity[T]): Quantity[T] = {
     assert(measurementUnit.category.equals(other.measurementUnit.category),
       "Cannot detect min on quantities with different categories")
 
@@ -51,11 +51,11 @@ case class Quantity(value: Double, measurementUnit: MeasurementUnit, scale: Engi
    * @return -1, 0, or 1 as this Quantity is numerically less than, equal to,
    *         or greater than val.
    */
-  def compareTo(other: Quantity, epsilon: Double = 0.001): Int = {
+  def compareTo(other: Quantity[T], epsilon: Double = 0.001): Int = {
     assert(measurementUnit.category == other.measurementUnit.category,
       "Error, cannot compare Quantity with incompatible Units")
-    val matchedVal: Quantity = other.convertScaleTo(scale)
-    val matchedValue: Double = matchedVal.value
+    val matchedVal = other.convertScaleTo(scale)
+    val matchedValue = matchedVal.value
     if (epsilonEquals(matchedValue, epsilon))
       0
     else if (value < matchedValue)
@@ -64,7 +64,7 @@ case class Quantity(value: Double, measurementUnit: MeasurementUnit, scale: Engi
       1
   }
 
-  def convertUnitsTo(desiredUnit: MeasurementUnit): Quantity = {
+  def convertUnitsTo(desiredUnit: T): Quantity[T] = {
     if (desiredUnit.equals(measurementUnit))
       this
     else {
@@ -73,7 +73,7 @@ case class Quantity(value: Double, measurementUnit: MeasurementUnit, scale: Engi
     }
   }
 
-  def convertScaleTo(desiredScale: EngineeringScale): Quantity = {
+  def convertScaleTo(desiredScale: EngineeringScale): Quantity[T] = {
     if (desiredScale.equals(scale))
       this
     else {

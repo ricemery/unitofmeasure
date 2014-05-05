@@ -26,7 +26,7 @@ Example of creating a Length Quantity and conversion between units and scale.
     val kmValue = 12.34
     val kmUnit = METER
     val kmScale = KILO
-    val kmQuantity = Quantity(kmValue, kmUnit, kmScale)
+    val kmQuantity = Quantity[LengthUnit](kmValue, kmUnit, kmScale)
 
 ### Convert scale to MILLI
 
@@ -60,6 +60,6 @@ be returned in the unit/scale of the object instance that subtract method is cal
 
 The quantities are converted to a common unit and scale when min/max are evaluated.
 
-    val microQuantity = Quantity(456, METER, MICRO)
+    val microQuantity = Quantity[LengthUnit](456, METER, MICRO)
     val min = microQuantity.min(kmQuantity)
     val max = microQuantity.max(kmQuantity)
