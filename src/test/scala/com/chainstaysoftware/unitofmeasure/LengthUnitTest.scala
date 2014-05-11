@@ -12,6 +12,20 @@ class LengthUnitTest extends FunSuite with Matchers with BeforeAndAfter with Eps
     METER.standardUnit should be (METER)
   }
 
+  test("mile") {
+    MILE.label should be (LengthConstants.MILE_LABEL)
+    MILE.abbreviation should be (LengthConstants.MILE_ABBREV)
+    MILE.factor should be (LengthConstants.METER_PER_MILE)
+    MILE.standardUnit should be (METER)
+  }
+
+  test("yard") {
+    YARD.label should be (LengthConstants.YARD_LABEL)
+    YARD.abbreviation should be (LengthConstants.YARD_ABBREV)
+    YARD.factor should be (LengthConstants.METER_PER_YARD)
+    YARD.standardUnit should be (METER)
+  }
+
   test("foot") {
     FOOT.label should be (LengthConstants.FOOT_LABEL)
     FOOT.abbreviation should be (LengthConstants.FOOT_ABBREV)

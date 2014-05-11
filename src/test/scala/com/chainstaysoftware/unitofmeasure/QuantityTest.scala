@@ -70,6 +70,12 @@ class QuantityTest extends FunSuite with Matchers with BeforeAndAfter with Epsil
     epsilonEquals(footQuantity.value, expectedFeet, epsilon) should be (true)
     footQuantity.measurementUnit should be (FOOT)
     footQuantity.scale should be (NONE)
+
+    val expectedMiles = startMeters / LengthConstants.METER_PER_MILE
+    val mileQuantity = meterQuantity.convertUnitsTo(MILE)
+    epsilonEquals(mileQuantity.value, expectedMiles, epsilon)
+    mileQuantity.measurementUnit should be (MILE)
+    mileQuantity.scale should be (NONE)
   }
 
   test("angle convertUnitsTo") {
