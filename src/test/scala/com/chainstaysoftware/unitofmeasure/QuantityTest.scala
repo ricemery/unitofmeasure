@@ -65,16 +65,16 @@ class QuantityTest extends FunSuite with Matchers with BeforeAndAfter with Epsil
     val meterQuantity = Quantity[LengthUnit](startMeters, Meter, None)
 
     val expectedFeet = startMeters / LengthConstants.MeterPerFoot
-    val footQuantity = meterQuantity.convertUnitsTo(FOOT)
+    val footQuantity = meterQuantity.convertUnitsTo(Foot)
 
     epsilonEquals(footQuantity.value, expectedFeet, epsilon) should be (true)
-    footQuantity.measurementUnit should be (FOOT)
+    footQuantity.measurementUnit should be (Foot)
     footQuantity.scale should be (None)
 
     val expectedMiles = startMeters / LengthConstants.MeterPerMile
-    val mileQuantity = meterQuantity.convertUnitsTo(MILE)
+    val mileQuantity = meterQuantity.convertUnitsTo(Mile)
     epsilonEquals(mileQuantity.value, expectedMiles, epsilon)
-    mileQuantity.measurementUnit should be (MILE)
+    mileQuantity.measurementUnit should be (Mile)
     mileQuantity.scale should be (None)
   }
 
@@ -111,9 +111,9 @@ class QuantityTest extends FunSuite with Matchers with BeforeAndAfter with Epsil
     val timeScale = None
     val timeQuantity = Quantity[TimeUnit](timeValue, timeUnit, timeScale)
 
-    val timeMinuteQuantity = timeQuantity.convertUnitsTo(MINUTE)
+    val timeMinuteQuantity = timeQuantity.convertUnitsTo(Minute)
 
-    timeMinuteQuantity should be (Quantity[TimeUnit](3, MINUTE, None))
+    timeMinuteQuantity should be (Quantity[TimeUnit](3, Minute, None))
   }
 
   test("length convertScaleTo") {
@@ -217,5 +217,13 @@ class QuantityTest extends FunSuite with Matchers with BeforeAndAfter with Epsil
     qWithinEpsilonB.compareTo(q1) should be (0)
     qAboveEpsilon.compareTo(q1) should be (1)
     qBelowEpsilon.compareTo(q1) should be (-1)
+  }
+
+  test("compareToAltUnits") {
+    val testValue = 1
+    val q1 = Quantity[LengthUnit](testValue, Meter, Kilo)
+    val q2 = q1.convertUnitsTo(Foot)
+
+    q1.compareTo(q2) should be (0)
   }
 }

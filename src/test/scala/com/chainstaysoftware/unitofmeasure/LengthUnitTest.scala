@@ -13,24 +13,24 @@ class LengthUnitTest extends FunSuite with Matchers with BeforeAndAfter with Eps
   }
 
   test("mile") {
-    MILE.label should be (LengthConstants.MileLabel)
-    MILE.abbreviation should be (LengthConstants.MileAbbrev)
-    MILE.factor should be (LengthConstants.MeterPerMile)
-    MILE.standardUnit should be (Meter)
+    Mile.label should be (LengthConstants.MileLabel)
+    Mile.abbreviation should be (LengthConstants.MileAbbrev)
+    Mile.factor should be (LengthConstants.MeterPerMile)
+    Mile.standardUnit should be (Meter)
   }
 
   test("yard") {
-    YARD.label should be (LengthConstants.YARD_LABEL)
-    YARD.abbreviation should be (LengthConstants.YardAbbrev)
-    YARD.factor should be (LengthConstants.MeterPerYard)
-    YARD.standardUnit should be (Meter)
+    Yard.label should be (LengthConstants.YARD_LABEL)
+    Yard.abbreviation should be (LengthConstants.YardAbbrev)
+    Yard.factor should be (LengthConstants.MeterPerYard)
+    Yard.standardUnit should be (Meter)
   }
 
   test("foot") {
-    FOOT.label should be (LengthConstants.FootLabel)
-    FOOT.abbreviation should be (LengthConstants.FootAbbrev)
-    FOOT.factor should be (LengthConstants.MeterPerFoot)
-    FOOT.standardUnit should be (Meter)
+    Foot.label should be (LengthConstants.FootLabel)
+    Foot.abbreviation should be (LengthConstants.FootAbbrev)
+    Foot.factor should be (LengthConstants.MeterPerFoot)
+    Foot.standardUnit should be (Meter)
   }
 
   test("conversionsToStandard") {
@@ -40,7 +40,7 @@ class LengthUnitTest extends FunSuite with Matchers with BeforeAndAfter with Eps
 
     val startFt: Double = 3.3
     val expectedFromFt: Double = startFt * LengthConstants.MeterPerFoot
-    epsilonEquals(FOOT.convertToStandard(startFt), expectedFromFt, epsilon) should be (true)
+    epsilonEquals(Foot.convertToStandard(startFt), expectedFromFt, epsilon) should be (true)
   }
 
   test("conversionsFromStandard") {
@@ -49,6 +49,6 @@ class LengthUnitTest extends FunSuite with Matchers with BeforeAndAfter with Eps
     Meter.convertFromStandard(startMeters) should be (expectedToMeters)
 
     val expectedToFt: Double = startMeters / LengthConstants.MeterPerFoot
-    epsilonEquals(FOOT.convertFromStandard(startMeters), expectedToFt, epsilon) should be (true)
+    epsilonEquals(Foot.convertFromStandard(startMeters), expectedToFt, epsilon) should be (true)
   }
 }

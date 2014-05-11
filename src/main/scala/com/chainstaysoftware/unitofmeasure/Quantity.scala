@@ -54,7 +54,7 @@ case class Quantity[T <: MeasurementUnit](value: Double, measurementUnit: T, sca
   def compareTo(other: Quantity[T], epsilon: Double = 0.001): Int = {
     assert(measurementUnit.category == other.measurementUnit.category,
       "Error, cannot compare Quantity with incompatible Units")
-    val matchedVal = other.convertScaleTo(scale)
+    val matchedVal = other.convertUnitsTo(measurementUnit).convertScaleTo(scale)
     val matchedValue = matchedVal.value
     if (epsilonEquals(matchedValue, epsilon))
       0
