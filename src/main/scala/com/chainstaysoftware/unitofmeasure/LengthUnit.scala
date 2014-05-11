@@ -1,16 +1,16 @@
 package com.chainstaysoftware.unitofmeasure
 
 
-case object METER extends LengthUnit(LengthConstants.METER_LABEL,
-  LengthConstants.METER_ABBREV, 1.0)
-case object MILE extends LengthUnit(LengthConstants.MILE_LABEL,
-  LengthConstants.MILE_ABBREV, LengthConstants.METER_PER_MILE)
+case object Meter extends LengthUnit(LengthConstants.MeterLabel,
+  LengthConstants.MeterAbbrev, 1.0)
+case object MILE extends LengthUnit(LengthConstants.MileLabel,
+  LengthConstants.MileAbbrev, LengthConstants.MeterPerMile)
 case object YARD extends LengthUnit(LengthConstants.YARD_LABEL,
-  LengthConstants.YARD_ABBREV, LengthConstants.METER_PER_YARD)
-case object FOOT extends LengthUnit(LengthConstants.FOOT_LABEL,
-  LengthConstants.FOOT_ABBREV, LengthConstants.METER_PER_FOOT)
-case object INCH extends LengthUnit(LengthConstants.INCH_LABEL,
-  LengthConstants.INCH_ABBREV, LengthConstants.METER_PER_IN)
+  LengthConstants.YardAbbrev, LengthConstants.MeterPerYard)
+case object FOOT extends LengthUnit(LengthConstants.FootLabel,
+  LengthConstants.FootAbbrev, LengthConstants.MeterPerFoot)
+case object INCH extends LengthUnit(LengthConstants.InchLabel,
+  LengthConstants.InchAbbrev, LengthConstants.MeterPerIn)
 
 sealed abstract class LengthUnit(label: String, abbreviation: String, factor: Double)
-  extends MeasurementUnit(label, abbreviation, factor, LENGTH)
+  extends MeasurementUnit(label, abbreviation, factor, Length)

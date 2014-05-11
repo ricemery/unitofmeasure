@@ -7,41 +7,41 @@ class QuantityTest extends FunSuite with Matchers with BeforeAndAfter with Epsil
 
   test("length creation") {
     val kmValue = 12.34
-    val kmUnit = METER
-    val kmScale = KILO
+    val kmUnit = Meter
+    val kmScale = Kilo
     val kmQuantity = Quantity[LengthUnit](kmValue, kmUnit, kmScale)
 
     kmQuantity.value should be (kmValue)
-    kmQuantity.measurementUnit should be (METER)
-    kmQuantity.scale should be (KILO)
+    kmQuantity.measurementUnit should be (Meter)
+    kmQuantity.scale should be (Kilo)
   }
 
   test("angle creation") {
     val degreeValue = 90.0
-    val degreeUnit = DEGREES
-    val degreeScale = NONE
+    val degreeUnit = Degrees
+    val degreeScale = None
     val degreeQuantity = Quantity[AngleUnit](degreeValue, degreeUnit, degreeScale)
 
     degreeQuantity.value should be (degreeValue)
-    degreeQuantity.measurementUnit should be (DEGREES)
-    degreeQuantity.scale should be (NONE)
+    degreeQuantity.measurementUnit should be (Degrees)
+    degreeQuantity.scale should be (None)
   }
 
   test("frequency creation") {
     val frequencyValue = 30.0
-    val frequencyUnit = HERTZ
-    val frequencyScale = MEGA
+    val frequencyUnit = Hertz
+    val frequencyScale = Mega
     val frequencyQuantity = Quantity[FrequencyUnit](frequencyValue, frequencyUnit, frequencyScale)
 
     frequencyQuantity.value should be (frequencyValue)
     frequencyQuantity.measurementUnit should be (frequencyUnit)
-    frequencyQuantity.scale should be (MEGA)
+    frequencyQuantity.scale should be (Mega)
   }
 
   test("temperature creation") {
     val tempValue = 32.0
     val tempUnit = FAHRENHEIT
-    val tempScale = NONE
+    val tempScale = None
     val tempQuantity = Quantity[TemperatureUnit](tempValue, tempUnit, tempScale)
 
     tempQuantity.value should be (tempValue)
@@ -51,8 +51,8 @@ class QuantityTest extends FunSuite with Matchers with BeforeAndAfter with Epsil
 
   test("time creation") {
     val timeValue = 1000
-    val timeUnit = SECOND
-    val timeScale = MILLI
+    val timeUnit = Second
+    val timeScale = Milli
     val timeQuantity = Quantity[TimeUnit](timeValue, timeUnit, timeScale)
 
     timeQuantity.value should be (timeValue)
@@ -62,129 +62,129 @@ class QuantityTest extends FunSuite with Matchers with BeforeAndAfter with Epsil
 
   test("length convertUnitsTo") {
     val startMeters = 54.32
-    val meterQuantity = Quantity[LengthUnit](startMeters, METER, NONE)
+    val meterQuantity = Quantity[LengthUnit](startMeters, Meter, None)
 
-    val expectedFeet = startMeters / LengthConstants.METER_PER_FOOT
+    val expectedFeet = startMeters / LengthConstants.MeterPerFoot
     val footQuantity = meterQuantity.convertUnitsTo(FOOT)
 
     epsilonEquals(footQuantity.value, expectedFeet, epsilon) should be (true)
     footQuantity.measurementUnit should be (FOOT)
-    footQuantity.scale should be (NONE)
+    footQuantity.scale should be (None)
 
-    val expectedMiles = startMeters / LengthConstants.METER_PER_MILE
+    val expectedMiles = startMeters / LengthConstants.MeterPerMile
     val mileQuantity = meterQuantity.convertUnitsTo(MILE)
     epsilonEquals(mileQuantity.value, expectedMiles, epsilon)
     mileQuantity.measurementUnit should be (MILE)
-    mileQuantity.scale should be (NONE)
+    mileQuantity.scale should be (None)
   }
 
   test("angle convertUnitsTo") {
     val angleDegrees = 45.0
-    val angleDegreesQuantity = Quantity[AngleUnit](angleDegrees, DEGREES, NONE)
+    val angleDegreesQuantity = Quantity[AngleUnit](angleDegrees, Degrees, None)
 
-    val expectedRadians = angleDegrees / AngleConstants.DEGREE_PER_RADIAN
-    val angleRadiansQuantity = angleDegreesQuantity.convertUnitsTo(RADIANS)
+    val expectedRadians = angleDegrees / AngleConstants.DegreePerRadian
+    val angleRadiansQuantity = angleDegreesQuantity.convertUnitsTo(Radians)
 
     epsilonEquals(angleRadiansQuantity.value, expectedRadians, epsilon) should be (true)
-    angleRadiansQuantity.measurementUnit should be (RADIANS)
-    angleRadiansQuantity.scale should be (NONE)
+    angleRadiansQuantity.measurementUnit should be (Radians)
+    angleRadiansQuantity.scale should be (None)
   }
 
   test("temperature convertUnitsTo") {
     val tempValue = 32.0
     val tempUnit = FAHRENHEIT
-    val tempScale = NONE
+    val tempScale = None
     val tempQuantity = Quantity[TemperatureUnit](tempValue, tempUnit, tempScale)
 
     val expectedCentigrade = 0
-    val temperatureCentigradeQuantity = tempQuantity.convertUnitsTo(CENTIGRADE)
+    val temperatureCentigradeQuantity = tempQuantity.convertUnitsTo(Centigrade)
 
-    temperatureCentigradeQuantity should be (Quantity(expectedCentigrade, CENTIGRADE, NONE))
+    temperatureCentigradeQuantity should be (Quantity(expectedCentigrade, Centigrade, None))
 
-    val boiling = Quantity[TemperatureUnit](100, CENTIGRADE, NONE)
-    boiling.convertUnitsTo(FAHRENHEIT) should be (Quantity[TemperatureUnit](212, FAHRENHEIT, NONE))
+    val boiling = Quantity[TemperatureUnit](100, Centigrade, None)
+    boiling.convertUnitsTo(FAHRENHEIT) should be (Quantity[TemperatureUnit](212, FAHRENHEIT, None))
   }
 
   test("time convertUnitsTo") {
     val timeValue = 180
-    val timeUnit = SECOND
-    val timeScale = NONE
+    val timeUnit = Second
+    val timeScale = None
     val timeQuantity = Quantity[TimeUnit](timeValue, timeUnit, timeScale)
 
     val timeMinuteQuantity = timeQuantity.convertUnitsTo(MINUTE)
 
-    timeMinuteQuantity should be (Quantity[TimeUnit](3, MINUTE, NONE))
+    timeMinuteQuantity should be (Quantity[TimeUnit](3, MINUTE, None))
   }
 
   test("length convertScaleTo") {
     val startMeters = 54.32
-    val meterQuantity = Quantity[LengthUnit](startMeters, METER, NONE)
+    val meterQuantity = Quantity[LengthUnit](startMeters, Meter, None)
 
     val expectedMillimeters = startMeters * 1000
-    val millimeterQuantity = meterQuantity.convertScaleTo(MILLI)
+    val millimeterQuantity = meterQuantity.convertScaleTo(Milli)
 
-    millimeterQuantity should be (Quantity[LengthUnit](expectedMillimeters, METER, MILLI))
+    millimeterQuantity should be (Quantity[LengthUnit](expectedMillimeters, Meter, Milli))
   }
 
   test("frequency convertScaleTo") {
     val frequencyValue = 30.0
-    val frequencyUnit = HERTZ
-    val frequencyScale = MEGA
+    val frequencyUnit = Hertz
+    val frequencyScale = Mega
     val frequencyQuantity = Quantity[FrequencyUnit](frequencyValue, frequencyUnit, frequencyScale)
 
-    val expectedHertz = frequencyValue * MEGA.factor
-    val frequencyHertzQuantity = frequencyQuantity.convertScaleTo(NONE)
+    val expectedHertz = frequencyValue * Mega.factor
+    val frequencyHertzQuantity = frequencyQuantity.convertScaleTo(None)
 
-    frequencyHertzQuantity should be (Quantity(expectedHertz, HERTZ, NONE))
+    frequencyHertzQuantity should be (Quantity(expectedHertz, Hertz, None))
   }
 
   test("temperature convertScaleTo") {
-    val boiling = Quantity[TemperatureUnit](100, CENTIGRADE, NONE)
+    val boiling = Quantity[TemperatureUnit](100, Centigrade, None)
 
-    boiling.convertScaleTo(MILLI) should be (Quantity[TemperatureUnit](boiling.value / MILLI.factor, CENTIGRADE, MILLI))
+    boiling.convertScaleTo(Milli) should be (Quantity[TemperatureUnit](boiling.value / Milli.factor, Centigrade, Milli))
   }
 
   test("time convertScaleTo") {
     val timeValue = 60000
-    val timeUnit = SECOND
-    val timeScale = MILLI
+    val timeUnit = Second
+    val timeScale = Milli
     val timeQuantity = Quantity[TimeUnit](timeValue, timeUnit, timeScale)
 
-    val secondsQuantity = timeQuantity.convertScaleTo(NONE)
+    val secondsQuantity = timeQuantity.convertScaleTo(None)
 
-    secondsQuantity should be (Quantity[TimeUnit](60, SECOND, NONE))
+    secondsQuantity should be (Quantity[TimeUnit](60, Second, None))
   }
 
   test("length add") {
-    val q1 = Quantity[LengthUnit](1, METER, ATTO)
-    val q2 = Quantity[LengthUnit](1, METER, ATTO)
+    val q1 = Quantity[LengthUnit](1, Meter, Atto)
+    val q2 = Quantity[LengthUnit](1, Meter, Atto)
 
-    q1.add(q2) should be (Quantity[LengthUnit](2, METER, ATTO))
+    q1.add(q2) should be (Quantity[LengthUnit](2, Meter, Atto))
 
-    val q3 = Quantity[LengthUnit](1, METER, NONE)
-    val q4 = Quantity[LengthUnit](1, METER, KILO)
+    val q3 = Quantity[LengthUnit](1, Meter, None)
+    val q4 = Quantity[LengthUnit](1, Meter, Kilo)
 
-    q4.add(q3) should be (Quantity[LengthUnit](1.001, METER, KILO))
-    q3.add(q4) should be (Quantity[LengthUnit](1001, METER, NONE))
+    q4.add(q3) should be (Quantity[LengthUnit](1.001, Meter, Kilo))
+    q3.add(q4) should be (Quantity[LengthUnit](1001, Meter, None))
   }
 
   test("length subtract") {
-    val q1 = Quantity[LengthUnit](1, METER, ATTO)
-    val q2 = Quantity[LengthUnit](1, METER, ATTO)
+    val q1 = Quantity[LengthUnit](1, Meter, Atto)
+    val q2 = Quantity[LengthUnit](1, Meter, Atto)
 
-    q1.subtract(q2) should be (Quantity[LengthUnit](0, METER, ATTO))
+    q1.subtract(q2) should be (Quantity[LengthUnit](0, Meter, Atto))
 
-    val q3 = Quantity[LengthUnit](1, METER, NONE)
-    val q4 = Quantity[LengthUnit](1, METER, KILO)
+    val q3 = Quantity[LengthUnit](1, Meter, None)
+    val q4 = Quantity[LengthUnit](1, Meter, Kilo)
 
-    q4.subtract(q3) should be (Quantity[LengthUnit](0.999, METER, KILO))
-    q3.subtract(q4) should be (Quantity[LengthUnit](-999, METER, NONE))
+    q4.subtract(q3) should be (Quantity[LengthUnit](0.999, Meter, Kilo))
+    q3.subtract(q4) should be (Quantity[LengthUnit](-999, Meter, None))
   }
 
   test("min") {
-    val q1 = Quantity[LengthUnit](1, METER, MILLI)
-    val q2 = Quantity[LengthUnit](2, METER, MILLI)
-    val q3 = Quantity[LengthUnit](1, METER, KILO)
+    val q1 = Quantity[LengthUnit](1, Meter, Milli)
+    val q2 = Quantity[LengthUnit](2, Meter, Milli)
+    val q3 = Quantity[LengthUnit](1, Meter, Kilo)
 
     q1.min(q1) should be (q1)
     q1.min(q2) should be (q1)
@@ -193,9 +193,9 @@ class QuantityTest extends FunSuite with Matchers with BeforeAndAfter with Epsil
   }
 
   test("max") {
-    val q1 = Quantity[LengthUnit](1, METER, MILLI)
-    val q2 = Quantity[LengthUnit](2, METER, MILLI)
-    val q3 = Quantity[LengthUnit](1, METER, KILO)
+    val q1 = Quantity[LengthUnit](1, Meter, Milli)
+    val q2 = Quantity[LengthUnit](2, Meter, Milli)
+    val q3 = Quantity[LengthUnit](1, Meter, Kilo)
 
     q1.max(q1) should be (q1)
     q1.max(q2) should be (q2)
@@ -205,12 +205,12 @@ class QuantityTest extends FunSuite with Matchers with BeforeAndAfter with Epsil
 
   test("compareTo") {
     val testValue = 123.45
-    val q1 = Quantity[LengthUnit](testValue, METER, NONE)
+    val q1 = Quantity[LengthUnit](testValue, Meter, None)
     val defaultEpsilon = 0.001
-    val qWithinEpsilonA = q1.add(Quantity[LengthUnit](defaultEpsilon / 2, METER, NONE))
-    val qWithinEpsilonB = q1.subtract(Quantity[LengthUnit](defaultEpsilon / 2, METER, NONE))
-    val qAboveEpsilon = q1.add(Quantity[LengthUnit](1, METER, NONE))
-    val qBelowEpsilon = q1.subtract(Quantity[LengthUnit](1, METER, NONE))
+    val qWithinEpsilonA = q1.add(Quantity[LengthUnit](defaultEpsilon / 2, Meter, None))
+    val qWithinEpsilonB = q1.subtract(Quantity[LengthUnit](defaultEpsilon / 2, Meter, None))
+    val qAboveEpsilon = q1.add(Quantity[LengthUnit](1, Meter, None))
+    val qBelowEpsilon = q1.subtract(Quantity[LengthUnit](1, Meter, None))
 
     q1.compareTo(q1) should be (0)
     qWithinEpsilonA.compareTo(q1) should be (0)

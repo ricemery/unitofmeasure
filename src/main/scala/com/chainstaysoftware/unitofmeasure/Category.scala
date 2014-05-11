@@ -1,9 +1,9 @@
 package com.chainstaysoftware.unitofmeasure
 
-case object ANGLE extends Category(RADIANS)
-case object FREQUENCY extends Category(HERTZ)
-case object LENGTH extends Category(METER)
-case object TEMPERATURE extends Category(CENTIGRADE)
-case object TIME extends Category(SECOND)
+case object Angle extends Category(Radians)
+case object Frequency extends Category(Hertz)
+case object Length extends Category(Meter)
+case object Temperature extends Category(Centigrade)
+case object Time extends Category(Second)
 
 sealed abstract class Category(val default: MeasurementUnit)

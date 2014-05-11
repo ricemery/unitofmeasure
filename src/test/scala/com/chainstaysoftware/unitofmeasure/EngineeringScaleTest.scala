@@ -4,18 +4,18 @@ import org.scalatest.{Matchers, FunSuite, BeforeAndAfter}
 
 class EngineeringScaleTest extends FunSuite with Matchers with BeforeAndAfter with EpsilonEquals {
   test("test factor") {
-    KILO.factor should be (1000.0)
-    ATTO.factor should be (1E-18)
+    Kilo.factor should be (1000.0)
+    Atto.factor should be (1E-18)
   }
 
   test("test prefix") {
-    KILO.prefix should be ("kilo")
-    ATTO.prefix should be ("atto")
+    Kilo.prefix should be ("kilo")
+    Atto.prefix should be ("atto")
   }
 
   test("test symbol") {
-    KILO.symbol should be ("K")
-    ATTO.symbol should be ("a")
+    Kilo.symbol should be ("K")
+    Atto.symbol should be ("a")
   }
 
   test("test conversions") {
@@ -23,8 +23,8 @@ class EngineeringScaleTest extends FunSuite with Matchers with BeforeAndAfter wi
     val scaledKilo: Double = 12.34
     val unscaledKilo: Double = scaledKilo * 1000.0
 
-    epsilonEquals(KILO.convertToUnscaled(scaledKilo), unscaledKilo, epsilon) should be (true)
-    epsilonEquals(KILO.convertToScaled(unscaledKilo), scaledKilo, epsilon) should be (true)
+    epsilonEquals(Kilo.convertToUnscaled(scaledKilo), unscaledKilo, epsilon) should be (true)
+    epsilonEquals(Kilo.convertToScaled(unscaledKilo), scaledKilo, epsilon) should be (true)
   }
 
   test("test scale") {
@@ -36,20 +36,20 @@ class EngineeringScaleTest extends FunSuite with Matchers with BeforeAndAfter wi
     val bigger: Double = 1.0E14
     val biggest: Double = 1.0E20
 
-    val smallestScale = ATTO
-    val smallerScale = FEMTO
-    val smallScale = MICRO
-    val justRightScale = NONE
-    val bigScale = KILO
-    val biggerScale = TERA
-    val biggestScale = EXA
+    val smallestScale = Atto
+    val smallerScale = Femto
+    val smallScale = Micro
+    val justRightScale = None
+    val bigScale = Kilo
+    val biggerScale = Tera
+    val biggestScale = Exa
 
-    NONE.getScale(smallest) should be (smallestScale)
-    NONE.getScale(smaller) should be (smallerScale)
-    NONE.getScale(small) should be (smallScale)
-    NONE.getScale(justRight) should be (justRightScale)
-    NONE.getScale(big) should be (bigScale)
-    NONE.getScale(bigger) should be (biggerScale)
-    NONE.getScale(biggest) should be (biggestScale)
+    None.getScale(smallest) should be (smallestScale)
+    None.getScale(smaller) should be (smallerScale)
+    None.getScale(small) should be (smallScale)
+    None.getScale(justRight) should be (justRightScale)
+    None.getScale(big) should be (bigScale)
+    None.getScale(bigger) should be (biggerScale)
+    None.getScale(biggest) should be (biggestScale)
   }
 }

@@ -1,13 +1,13 @@
 package com.chainstaysoftware.unitofmeasure
 
 object TimeConstants {
-  val SEC_PER_MIN: Double = 60.0
-  val MIN_PER_HOUR: Double = 60.0
-  val SEC_PER_HOUR: Double = MIN_PER_HOUR * SEC_PER_MIN
-  val SECOND_LABEL = "seconds"
-  val SECOND_ABBREV = "s"
-  val MINUTE_LABEL = "minutes"
-  val MINUTE_ABBREV = "min"
-  val HOUR_LABEL = "hours"
-  val HOUR_ABBREV = "hr"
+  val SecPerMin: Double = 60.0
+  val MinPerHour: Double = 60.0
+  val SecPerHour: Double = MinPerHour * SecPerMin
+  val SecondLabel = "seconds"
+  val SecondAbbrev = "s"
+  val MinuteLabel = "minutes"
+  val MinuteAbbrev = "min"
+  val HourLabel = "hours"
+  val HourAbbrev = "hr"
 }
