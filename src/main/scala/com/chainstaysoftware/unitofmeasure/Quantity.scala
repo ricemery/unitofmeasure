@@ -1,5 +1,7 @@
 package com.chainstaysoftware.unitofmeasure
 
+import EqualsHelper.DoubleWithEpsilonEquals
+
 case class Quantity[T <: MeasurementUnit](value: Double, measurementUnit: T, scale: EngineeringScale) {
   def add(other: Quantity[T]): Quantity[T] = {
     assert(measurementUnit.category.equals(other.measurementUnit.category),
@@ -43,7 +45,7 @@ case class Quantity[T <: MeasurementUnit](value: Double, measurementUnit: T, sca
 
   /**
    * Compares this {@link Quantity} with the specified {@link Quantity}. Two {@link Quantity}
-   * objects that are equal in value but have a different {@link EngineeringScale}
+   * objects that are equal when converted to a common {@link EngineeringScale} and {@link MeasurementUnit}
    * are considered equal by this method. This method is provided in preference
    * to individual methods for each of the six boolean comparison operators
    * (<, ==, >, >=, !=, <=). The suggested idiom for performing these comparisons is:
@@ -56,7 +58,8 @@ case class Quantity[T <: MeasurementUnit](value: Double, measurementUnit: T, sca
       "Error, cannot compare Quantity with incompatible Units")
     val matchedVal = other.convertUnitsTo(measurementUnit).convertScaleTo(scale)
     val matchedValue = matchedVal.value
-    if (epsilonEquals(matchedValue, epsilon))
+    implicit val precision = Precision(epsilon)
+    if (value ~= matchedValue)
       0
     else if (value < matchedValue)
       -1
@@ -80,11 +83,5 @@ case class Quantity[T <: MeasurementUnit](value: Double, measurementUnit: T, sca
       val rescaledValue = desiredScale.convertToScaled(scale.convertToUnscaled(value))
       new Quantity(rescaledValue, measurementUnit, desiredScale)
     }
-  }
-
-  private def epsilonEquals(y: Double, epsilon: Double) =
-  {
-    assert(epsilon >= 0.0, "epsilon must be greater than or equal to zero")
-    this.value == y || Math.abs(value - y) <= epsilon
   }
 }
